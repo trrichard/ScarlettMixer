@@ -1,5 +1,6 @@
 import wx
 
+TASK_RANGE = 50
 
 class MixerFrame(wx.Frame):
     def __init__(self,parent,title):

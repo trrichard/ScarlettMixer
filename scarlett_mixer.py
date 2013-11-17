@@ -1,10 +1,20 @@
 #!/usr/bin/python
+"""
+Scarlett Mixer
+
+Usage:
+    scarlett_mixer.py [-d]
+    scarlett_mixer.py --version
+    scarlett_mixer.py --help
+
+Options:
+    -d     Development Mode (Fake Mixer)
+"""
 import alsaaudio as aa
 import re
 import wx
+from docopt import docopt
 from scarlettgui import MixerFrame
-
-
 
 def unpackMixers(mixerList, scarlett_index):
     """Given a list of mixers, return the logical objects associated
@@ -61,22 +71,25 @@ def unpackMixers(mixerList, scarlett_index):
 
     print matricies
 
-def main():
-    cards = aa.cards()
-    scarlett_index = None
-    for i in range(0, len(cards)):
-        if cards[i] == "USB":
-            # it's probably scarlett
-            scarlett_index = i
-    if not scarlett_index:
-        raise Exception("Couldn't find your scarlett usb device!")
+def main(arguments):
+    if arguments["-d"]:
+        print "devmode"
     else:
-        print "Found Scarlett at index {}".format(scarlett_index)
+        cards = aa.cards()
+        scarlett_index = None
+        for i in range(0, len(cards)):
+            if cards[i] == "USB":
+                # it's probably scarlett
+                scarlett_index = i
+        if not scarlett_index:
+            raise Exception("Couldn't find your scarlett usb device!")
+        else:
+            print "Found Scarlett at index {}".format(scarlett_index)
 
-    scarlett_mixers = aa.mixers(scarlett_index)
-    
-    print "Found {} scarlett mixers".format(len(scarlett_mixers))
-    mixer = unpackMixers(scarlett_mixers,scarlett_index)
+        scarlett_mixers = aa.mixers(scarlett_index)
+        
+        print "Found {} scarlett mixers".format(len(scarlett_mixers))
+        mixer = unpackMixers(scarlett_mixers,scarlett_index)
 
     # Create a new app, don't redirect stdout/stderr to a window.
     app = wx.App(False)  
@@ -86,4 +99,5 @@ def main():
     app.MainLoop()
 
 if __name__ == '__main__':
-    main()                 
+    arguments = docopt(__doc__, version='Scarlett Mixer 0.1')
+    main(arguments)
