@@ -2,50 +2,105 @@ import wx
 
 TASK_RANGE = 50
 
-class MixerFrame(wx.Frame):
-    def __init__(self,parent,title):
-        wx.Frame.__init__(self, parent, title=title, size=(200,100))
-        #self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
+class ChannelInputStrip(wx.BoxSizer):
+    def __init__(self,panel,inputs,current_input):
+        # TODO: Implement Stereo Mixers/Stereo Binding
+        wx.BoxSizer.__init__(self,wx.VERTICAL)
+        volumeAndMeterBarContainer = wx.BoxSizer(wx.HORIZONTAL)
+        height = 250
+        decebil_range = 50
+        slider = wx.Slider(
+                panel,
+                value=200,
+                minValue=150,
+                maxValue=500,
+ #               pos=(20, 20),
+                size=(-1, height), 
+                style=(wx.SL_VERTICAL|wx.SL_INVERSE))
+        slider.Bind(wx.EVT_SCROLL, self.OnSliderScroll)
+        # TODO make the combo_box use current_input to select the
+        # right input automaticaly
+        combo_box = wx.Choice(
+                panel, 
+                choices=inputs)
+        
+        gauge = wx.Gauge(
+                panel, 
+                range=decebil_range, 
+                size=(25, height),
+                style=wx.GA_VERTICAL)
+
+        combo_box.Bind(wx.EVT_COMBOBOX, self.OnSelect)
+        volumeAndMeterBarContainer.Add(slider)
+        volumeAndMeterBarContainer.Add(gauge)
+        
+        self.Add(combo_box)
+        self.Add(volumeAndMeterBarContainer)
+
+    def OnSliderScroll(self, e):
+        print e
+
+    def OnSelect(self, e):
+        print e
+
+class MixerConsoleFrame(wx.Frame):
+    def __init__(self, parent, mixer):
+        wx.Frame.__init__(self, parent, title="Scarlett Mixer", size=(200,100))
+        self.mixer = mixer
         self.InitUI()
 
+    def OnSelect(self, e):
+        pass
+
+    def addMatrixInput(self, panel, inputs, current_input):
+        channelInputStrip = ChannelInputStrip(panel, inputs, current_input)
+        return channelInputStrip
+
     
-    def InitUI(self):   
-        
+    def InitUI(self):
+        matrix_inputs = len(self.mixer.getMatrix())
+
+        # Update using observer pattern or timers??
+        # Probably observer 
+        # TODO: Strip out timer stuff
         self.timer = wx.Timer(self, 1)
         self.count = 0
 
         self.Bind(wx.EVT_TIMER, self.OnTimer, self.timer)
 
-        pnl = wx.Panel(self)
+        panel = wx.Panel(self)
+
+
+
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         hbox2 = wx.BoxSizer(wx.HORIZONTAL)
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.gauge = wx.Gauge(pnl, range=TASK_RANGE, size=(250, 25))
-        self.btn1 = wx.Button(pnl, wx.ID_OK)
-        self.btn2 = wx.Button(pnl, wx.ID_STOP)
-        self.text = wx.StaticText(pnl, label='Task to be done')
+        self.volumes = wx.BoxSizer(wx.HORIZONTAL)
+        input_channels = self.mixer.getHardwareInputMuxChannels()
+        input_channels.extend(self.mixer.getSoftwareInputMuxChannels())
 
-        self.Bind(wx.EVT_BUTTON, self.OnOk, self.btn1)
-        self.Bind(wx.EVT_BUTTON, self.OnStop, self.btn2)
+        for i in range(0,matrix_inputs):
+            current_value = None
+            if i in self.mixer.getMatrixMuxMap():
+                current_value = self.mixer.getMatrixMuxMap()[i]
+            inputer = self.addMatrixInput(
+                    panel, 
+                    input_channels,
+                    current_value)
+            self.volumes.Add(inputer)
 
-        hbox1.Add(self.gauge, proportion=1, flag=wx.ALIGN_CENTRE)
-        hbox2.Add(self.btn1, proportion=1, flag=wx.RIGHT, border=10)
-        hbox2.Add(self.btn2, proportion=1)
-        hbox3.Add(self.text, proportion=1)
-        vbox.Add((0, 30))
-        vbox.Add(hbox1, flag=wx.ALIGN_CENTRE)
         vbox.Add((0, 20))
-        vbox.Add(hbox2, proportion=1, flag=wx.ALIGN_CENTRE)
-        vbox.Add(hbox3, proportion=1, flag=wx.ALIGN_CENTRE)
+        vbox.Add(self.volumes, proportion=1)
 
-        pnl.SetSizer(vbox)
+        panel.SetSizer(vbox)
         
-        self.SetSize((300, 200))
-        self.SetTitle('wx.Gauge')
+        self.SetSize((1000, 1000))
+        self.SetTitle('Scarlett Mixer')
         self.Centre()
         self.Show(True)     
+
 
     def OnOk(self, e):
         

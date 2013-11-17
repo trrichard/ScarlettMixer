@@ -2,3 +2,58 @@ Dependencies:
     docopt
     alsaaudio
     wx 
+
+
+Mixer Diagram
+<ditaa>
+ /--------------\    18chn            6chn    /--------------\
+ | Hardware  in +--+-------\        /------+--+ ALSA PCM out |
+ \--------------/  |       |        |      |  \--------------/
+                   |       |        |      |
+                   |       v        v      |
+                   |   +---------------+   |
+                   |    \ Matrix  Mux /    |
+                   |     +-----+-----+     |
+                   |           |           |
+                   |           | 18chn     |
+                   |           v           |
+                   |     +-----------+     |
+                   |     | Mixer     |     |
+                   |     |    Matrix |     |
+                   |     |           |     |
+                   |     | 18x6 Gain |     |
+                   |     |   stages  |     |
+                   |     +-----+-----+     |
+                   |           |           |
+                   |           |           |
+                   | 18chn     | 6chn      | 6chn
+                   v           v           v
+                   =========================
+            +---------------+     +--—------------+
+             \ Output  Mux /       \ Capture Mux /
+              +-----+-----+         +-----+-----+
+                    |                     |
+                    | 6chn                |
+                    v                     |
+             +-------------+              |
+             | Master Gain |              |
+             +------+------+              |
+                    |                     |
+                    | 6chn                | 18chn
+                    | (3 stereo pairs)    |
+ /--------------\   |                     |   /--------------\
+ | Hardware out |<--/                     \-->| ALSA PCM  in |
+ \--------------/                             \--------------/
+</ditaa>
+
+Model
+    getHardwareOutputMuxChannels [ list of names? ]
+    getSoftwareOutputMuxChannels [ list of names? ] 
+    getHardwareInputMuxChannels [ list of names? ]
+    getSoftwareInputMuxChannels [ list of names? ] 
+    getMatrixMuxInputChannels [ number of channels? ] 
+    getMatrixMuxOutputChannels [ number of channels? ] 
+    getMatrixMuxMap { from hw/sw input channels to matrix numbers }
+    getMatrix [input(18)][output(6)] => gain
+    
+    setMatrixMuxMap { ... }
