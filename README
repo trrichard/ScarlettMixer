@@ -57,3 +57,9 @@ Model
     getMatrix [input(18)][output(6)] => gain
     
     setMatrixMuxMap { ... }
+
+Initial Functionality Reqs
+    Route Mixes as Stereo (A&B C&D E&F)
+    Selection of inputs.
+    Stereo joining of inputs
+

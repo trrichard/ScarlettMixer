@@ -1,54 +1,83 @@
 import wx
+# Import the easiest to use scrolledpanel.
+import wx.lib.scrolledpanel as scrolled
 
 TASK_RANGE = 50
 
-class ChannelInputStrip(wx.BoxSizer):
-    def __init__(self,panel,inputs,current_input):
+class ChannelInputStrip(wx.Panel):
+    def __init__(
+            self,
+            parent,
+            inputs,
+            current_input,
+            channel_count=1,
+            ):
+        wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
+        if channel_count > 2:
+            raise "Input Strips with > 2 channels not supported yet"
         # TODO: Implement Stereo Mixers/Stereo Binding
-        wx.BoxSizer.__init__(self,wx.VERTICAL)
         volumeAndMeterBarContainer = wx.BoxSizer(wx.HORIZONTAL)
         height = 250
+        width = 100
         decebil_range = 50
-        slider = wx.Slider(
-                panel,
+        pan = wx.Slider(
+                self,
+                value=50,
+                minValue=0,
+                maxValue=100,
+#               pos=(20, 20),
+                size=(width, -1), 
+                style=(wx.SL_HORIZONTAL))
+        gain = wx.Slider(
+                self,
                 value=200,
                 minValue=150,
                 maxValue=500,
- #               pos=(20, 20),
+#               pos=(20, 20),
                 size=(-1, height), 
                 style=(wx.SL_VERTICAL|wx.SL_INVERSE))
-        slider.Bind(wx.EVT_SCROLL, self.OnSliderScroll)
+        gain.Bind(wx.EVT_SCROLL, self.OnSliderScroll)
+
         # TODO make the combo_box use current_input to select the
         # right input automaticaly
-        combo_box = wx.Choice(
-                panel, 
-                choices=inputs)
+        combo_box = wx.ComboBox(
+                self, 
+                choices=inputs,
+                size=(width,-1))
+        if current_input:
+            combo_box.SetStringSelection(current_input)
         
         gauge = wx.Gauge(
-                panel, 
+                self, 
                 range=decebil_range, 
                 size=(25, height),
                 style=wx.GA_VERTICAL)
 
         combo_box.Bind(wx.EVT_COMBOBOX, self.OnSelect)
-        volumeAndMeterBarContainer.Add(slider)
+
+        volumeAndMeterBarContainer.Add(gain)
         volumeAndMeterBarContainer.Add(gauge)
-        
-        self.Add(combo_box)
-        self.Add(volumeAndMeterBarContainer)
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(combo_box)
+        sizer.Add(volumeAndMeterBarContainer)
+        sizer.Add(pan)
+        self.SetSizer(sizer)
 
     def OnSliderScroll(self, e):
-        print e
+        pass
 
     def OnSelect(self, e):
-        print e
+        pass
 
-class MixerConsoleFrame(wx.Frame):
+
+class MixPanel(scrolled.ScrolledPanel):
     def __init__(self, parent, mixer):
-        wx.Frame.__init__(self, parent, title="Scarlett Mixer", size=(200,100))
+        scrolled.ScrolledPanel.__init__(self, parent=parent, id=wx.ID_ANY)
         self.mixer = mixer
         self.InitUI()
-
+        self.SetAutoLayout(1)
+        self.SetupScrolling()
+    
     def OnSelect(self, e):
         pass
 
@@ -68,10 +97,6 @@ class MixerConsoleFrame(wx.Frame):
 
         self.Bind(wx.EVT_TIMER, self.OnTimer, self.timer)
 
-        panel = wx.Panel(self)
-
-
-
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         hbox2 = wx.BoxSizer(wx.HORIZONTAL)
@@ -86,7 +111,7 @@ class MixerConsoleFrame(wx.Frame):
             if i in self.mixer.getMatrixMuxMap():
                 current_value = self.mixer.getMatrixMuxMap()[i]
             inputer = self.addMatrixInput(
-                    panel, 
+                    self, 
                     input_channels,
                     current_value)
             self.volumes.Add(inputer)
@@ -94,12 +119,12 @@ class MixerConsoleFrame(wx.Frame):
         vbox.Add((0, 20))
         vbox.Add(self.volumes, proportion=1)
 
-        panel.SetSizer(vbox)
+        self.SetSizer(vbox)
         
-        self.SetSize((1000, 1000))
-        self.SetTitle('Scarlett Mixer')
+#        self.SetSize((1000, 1000))
+#        self.SetTitle('Scarlett Mixer')
         self.Centre()
-        self.Show(True)     
+#        self.Show(True)     
 
 
     def OnOk(self, e):
@@ -111,7 +136,6 @@ class MixerConsoleFrame(wx.Frame):
         self.text.SetLabel('Task in Progress')
 
     def OnStop(self, e):
-        
         if self.count == 0 or self.count >= TASK_RANGE or not self.timer.IsRunning():
             return
 
@@ -127,3 +151,46 @@ class MixerConsoleFrame(wx.Frame):
 
             self.timer.Stop()
             self.text.SetLabel('Task Completed')
+
+class MixerConsoleMixes(wx.Notebook):
+    def __init__(self,parent,mixer):
+        wx.Notebook.__init__(self, parent, id=wx.ID_ANY, style=wx.BK_TOP)
+        tabOne = MixPanel(self, mixer)
+#        tabOne.SetBackgroundColour("Gray")
+#        scrollWin.SetScrollbars( 0, x,  0, y+1 )
+#       scrollWin.SetScrollRate( 1, 1 )      # Pixels per scroll increment
+#        scrollWin.SetBestSize((100,100))
+
+        self.AddPage(tabOne, "A+B Mix")
+        self.AddPage(MixPanel(self,mixer), "C+D Mix")
+        self.AddPage(MixPanel(self,mixer), "E+F Mix")
+
+        self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
+        self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGING, self.OnPageChanging)
+
+    def OnPageChanged(self, event):
+        old = event.GetOldSelection()
+        new = event.GetSelection()
+        sel = self.GetSelection()
+        event.Skip()
+
+    def OnPageChanging(self, event):
+        old = event.GetOldSelection()
+        new = event.GetSelection()
+        sel = self.GetSelection()
+        event.Skip()
+
+
+class MixerConsoleFrame(wx.Frame):
+    def __init__(self, parent, mixer):
+        wx.Frame.__init__(self, parent, title="Scarlett Mixer", size=(200,100))
+        panel = wx.Panel(self)
+        self.mixer = mixer
+        mixesConsole = MixerConsoleMixes(panel,mixer)
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(mixesConsole, 1, wx.ALL|wx.EXPAND, 5)
+        panel.SetSizer(sizer)
+        self.Layout()
+        self.Show()
+#        self.InitUI()
+

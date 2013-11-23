@@ -217,6 +217,7 @@ def main(arguments):
         
         print "Found {} scarlett mixers".format(len(scarlett_mixers))
         mixer = unpackMixers(scarlett_mixers,scarlett_index)
+        
 
     # Create a new app, don't redirect stdout/stderr to a window.
     app = wx.App(False)  
