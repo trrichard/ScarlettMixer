@@ -13,6 +13,7 @@ Options:
 import alsaaudio as aa
 import re
 import wx
+import mixer_model
 from docopt import docopt
 from scarlettgui import MixerConsoleFrame
 
@@ -71,66 +72,11 @@ def unpackMixers(mixerList, scarlett_index):
 
     print matricies
 
-class MixerAdaptor:
-    """
-    Adapts from mixer hardware to gui.
-    """
-    def __init__(self):
-        print "init mixer"
-        self.observers = []
-    
-    def addObserver(self, observer):
-        """
-        Implementation of the observer pattern for the mixer,
-        calls the observer function with some parameters 
-        I haven't decided on yet. This is used to handle the
-        metering
-        """
-        self.observers.append(observer)
 
-    def notifyObservers(self, delta):
-        for observer in self.observers:
-            observer(delta)
-
-    def saveRouting():
-        pass
-
-    def getHardwareOutputMuxChannels(self):
-        "[ list of names? ]"
-        pass
-
-    def getSoftwareOutputMuxChannels(self):
-        "[ list of names? ] "
-        pass
-
-    def getHardwareInputMuxChannels(self):
-        "[ list of names? ]"
-        pass
-
-    def getSoftwareInputMuxChannels(self):
-        " [ list of names? ] "
-        pass
-
-    def getMatrixMuxInputChannels(self):
-        "[ number of channels? ] "
-        pass
-
-    def getMatrixMuxOutputChannels(self):
-        "[ number of channels? ] "
-        pass
-
-    def getMatrixMuxMap(self):
-        "{ from hw/sw input channels to matrix numbers }"
-        pass
-
-    def getMatrix(self):
-        "[input(18)][output(6)] => gain"
-        pass
-
-class ScarlettMixerAdaptor(MixerAdaptor):
+class ScarlettMixerAdaptor(mixer_model.MixerModel):
     pass
 
-class DevMixerAdaptor(MixerAdaptor):
+class DevMixerAdaptor(mixer_model.MixerModel):
     def getHardwareOutputMuxChannels(self):
         "[ list of names? ]"
         return [ 
