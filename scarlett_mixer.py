@@ -76,77 +76,12 @@ def unpackMixers(mixerList, scarlett_index):
 class ScarlettMixerAdaptor(mixer_model.MixerModel):
     pass
 
-class DevMixerAdaptor(mixer_model.MixerModel):
-    def getHardwareOutputMuxChannels(self):
-        "[ list of names? ]"
-        return [ 
-                "monitor_left",
-                "monitor_right",
-                "headphones_1_left",
-                "headphones_1_right",
-                "headphones_2_left",
-                "headphones_2_right",
-                "spdif_left",
-                "spdif_right",
-                ]
-
-    def getSoftwareOutputMuxChannels(self):
-        "[ list of names? ] "
-        outputMuxChannels = []
-        for i in range(0,18):
-            outputMuxChannels.append("pcm_{}".format(i))
-        return outputMuxChannels
-
-    def getHardwareInputMuxChannels(self):
-        "[ list of names? ]"
-        inputMuxChannels = []
-        for i in range(0,18):
-            inputMuxChannels.append("analog_{}".format(i))
-        return inputMuxChannels
-
-    def getSoftwareInputMuxChannels(self):
-        " [ list of names? ] "
-        inputMuxChannels = []
-        for i in range(0,6):
-            inputMuxChannels.append("pcm_{}".format(i))
-        return inputMuxChannels
-
-    def getMatrixMuxInputChannels(self):
-        "[ number of channels? ] may be unnecessary"
-        pass
-
-    def getMatrixMuxOutputChannels(self):
-        "[ number of channels? ] may be unnecessary"
-        pass
-
-    def getMatrixMuxMap(self):
-        "{ from hw/sw input channels to matrix input numbers } no this is necessary "
-        return {
-            0:"analog_0",
-            1:"analog_1",
-            2:"analog_2",
-            3:"analog_3",
-            4:"analog_4",
-            5:"analog_5",
-            6:"analog_6",
-        }
-
-    def getMatrix(self):
-        "[matrix input number input(18)][matrix output number output(6)] => gain"
-        matrix_in = 18
-        matrix_out = 6
-        matrix = []
-        for i in range(0,matrix_in):
-            matrix.append([])
-            for j in range(0,matrix_out):
-                matrix[i].append(0)
-        return matrix
 
 def main(arguments):
     mixer = None
     if arguments["-d"]:
         print "devmode"
-        mixer = DevMixerAdaptor()
+        mixer = mixer_model.DevMixerAdaptor()
     else:
         cards = aa.cards()
         scarlett_index = None

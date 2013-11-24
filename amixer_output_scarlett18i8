@@ -1,0 +1,965 @@
+Simple mixer control 'Master',0
+  Capabilities: pvolume pvolume-joined pswitch pswitch-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 110 [82%] [-18.00dB] [on]
+Simple mixer control 'Master 1 (Monitor)',0
+  Capabilities: pvolume pswitch penum
+  Playback channels: Front Left - Front Right
+  Limits: Playback 0 - 134
+  Mono:
+  Front Left: Playback 128 [96%] [0.00dB] [on]
+  Front Right: Playback 128 [96%] [0.00dB] [on]
+Simple mixer control 'Master 1L (Monitor) Source',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix A'
+Simple mixer control 'Master 1R (Monitor) Source',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix B'
+Simple mixer control 'Master 2 (Headphone 1)',0
+  Capabilities: pvolume pswitch penum
+  Playback channels: Front Left - Front Right
+  Limits: Playback 0 - 134
+  Mono:
+  Front Left: Playback 128 [96%] [0.00dB] [on]
+  Front Right: Playback 128 [96%] [0.00dB] [on]
+Simple mixer control 'Master 2L (Headphone 1) Source Playback Enu',0
+  Capabilities: enum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix A'
+Simple mixer control 'Master 2R (Headphone 1) Source Playback Enu',0
+  Capabilities: enum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix B'
+Simple mixer control 'Master 3 (Headphone 2)',0
+  Capabilities: pvolume pswitch penum
+  Playback channels: Front Left - Front Right
+  Limits: Playback 0 - 134
+  Mono:
+  Front Left: Playback 128 [96%] [0.00dB] [on]
+  Front Right: Playback 128 [96%] [0.00dB] [on]
+Simple mixer control 'Master 3L (Headphone 2) Source Playback Enu',0
+  Capabilities: enum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix A'
+Simple mixer control 'Master 3R (Headphone 2) Source Playback Enu',0
+  Capabilities: enum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix B'
+Simple mixer control 'Master 4 (SPDIF)',0
+  Capabilities: pvolume pswitch penum
+  Playback channels: Front Left - Front Right
+  Limits: Playback 0 - 134
+  Mono:
+  Front Left: Playback 128 [96%] [0.00dB] [on]
+  Front Right: Playback 128 [96%] [0.00dB] [on]
+Simple mixer control 'Master 4L (SPDIF) Source',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix A'
+Simple mixer control 'Master 4R (SPDIF) Source',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Mix B'
+Simple mixer control 'Input 1 Impedance',0
+  Capabilities: enum
+  Items: 'Line' 'Hi-Z'
+  Item0: 'Line'
+Simple mixer control 'Input 1 Pad',0
+  Capabilities: enum
+  Items: 'Off' '-10dB'
+  Item0: 'Off'
+Simple mixer control 'Input 2 Impedance',0
+  Capabilities: enum
+  Items: 'Line' 'Hi-Z'
+  Item0: 'Line'
+Simple mixer control 'Input 2 Pad',0
+  Capabilities: enum
+  Items: 'Off' '-10dB'
+  Item0: 'Off'
+Simple mixer control 'Input 3 Pad',0
+  Capabilities: enum
+  Items: 'Off' '-10dB'
+  Item0: 'Off'
+Simple mixer control 'Input 4 Pad',0
+  Capabilities: enum
+  Items: 'Off' '-10dB'
+  Item0: 'Off'
+Simple mixer control 'Input Source 01',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 1'
+Simple mixer control 'Input Source 02',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 2'
+Simple mixer control 'Input Source 03',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 3'
+Simple mixer control 'Input Source 04',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 4'
+Simple mixer control 'Input Source 05',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 5'
+Simple mixer control 'Input Source 06',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 6'
+Simple mixer control 'Input Source 07',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 7'
+Simple mixer control 'Input Source 08',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'Analog 8'
+Simple mixer control 'Input Source 09',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'SPDIF 1'
+Simple mixer control 'Input Source 10',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'SPDIF 2'
+Simple mixer control 'Input Source 11',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 1'
+Simple mixer control 'Input Source 12',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 2'
+Simple mixer control 'Input Source 13',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 3'
+Simple mixer control 'Input Source 14',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 4'
+Simple mixer control 'Input Source 15',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 5'
+Simple mixer control 'Input Source 16',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 6'
+Simple mixer control 'Input Source 17',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 7'
+Simple mixer control 'Input Source 18',0
+  Capabilities: cenum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8' 'Mix A' 'Mix B' 'Mix C' 'Mix D' 'Mix E' 'Mix F' 'Mix G' 'Mix H'
+  Item0: 'ADAT 8'
+Simple mixer control 'Matrix 01 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 1'
+Simple mixer control 'Matrix 01 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 01 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 2'
+Simple mixer control 'Matrix 02 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 02 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 3'
+Simple mixer control 'Matrix 03 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 03 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 4'
+Simple mixer control 'Matrix 04 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 04 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 5'
+Simple mixer control 'Matrix 05 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 05 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 6'
+Simple mixer control 'Matrix 06 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 06 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 7'
+Simple mixer control 'Matrix 07 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 07 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'Analog 8'
+Simple mixer control 'Matrix 08 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 08 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 1'
+Simple mixer control 'Matrix 09 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 09 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 2'
+Simple mixer control 'Matrix 10 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 10 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 3'
+Simple mixer control 'Matrix 11 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 11 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 4'
+Simple mixer control 'Matrix 12 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 12 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 5'
+Simple mixer control 'Matrix 13 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 13 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 6'
+Simple mixer control 'Matrix 14 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 14 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 7'
+Simple mixer control 'Matrix 15 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 15 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 8'
+Simple mixer control 'Matrix 16 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 16 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 1'
+Simple mixer control 'Matrix 17 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 17 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 18 Input',0
+  Capabilities: penum
+  Items: 'Off' 'PCM 1' 'PCM 2' 'PCM 3' 'PCM 4' 'PCM 5' 'PCM 6' 'PCM 7' 'PCM 8' 'Analog 1' 'Analog 2' 'Analog 3' 'Analog 4' 'Analog 5' 'Analog 6' 'Analog 7' 'Analog 8' 'SPDIF 1' 'SPDIF 2' 'ADAT 1' 'ADAT 2' 'ADAT 3' 'ADAT 4' 'ADAT 5' 'ADAT 6' 'ADAT 7' 'ADAT 8'
+  Item0: 'PCM 2'
+Simple mixer control 'Matrix 18 Mix A',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 18 Mix B',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 128 [96%] [0.00dB]
+Simple mixer control 'Matrix 18 Mix C',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 0 [0%] [-128.00dB]
+Simple mixer control 'Matrix 18 Mix D',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 0 [0%] [-128.00dB]
+Simple mixer control 'Matrix 18 Mix E',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 0 [0%] [-128.00dB]
+Simple mixer control 'Matrix 18 Mix F',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 0 [0%] [-128.00dB]
+Simple mixer control 'Matrix 18 Mix G',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 0 [0%] [-128.00dB]
+Simple mixer control 'Matrix 18 Mix H',0
+  Capabilities: pvolume pvolume-joined penum
+  Playback channels: Mono
+  Limits: Playback 0 - 134
+  Mono: Playback 0 [0%] [-128.00dB]
+Simple mixer control 'Sample Clock Source',0
+  Capabilities: enum
+  Items: 'Internal' 'SPDIF' 'ADAT'
+  Item0: 'Internal'
+Simple mixer control 'Sample Clock Sync Status',0
+  Capabilities: enum
+  Items: 'No Lock' 'Locked'
+  Item0: 'Locked'
+Simple mixer control 'Save To HW',0
+  Capabilities: enum
+  Items: '---' 'Save'
+  Item0: '---'

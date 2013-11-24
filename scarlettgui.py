@@ -18,56 +18,74 @@ class ChannelInputStrip(wx.Panel):
         # TODO: Implement Stereo Mixers/Stereo Binding
         volumeAndMeterBarContainer = wx.BoxSizer(wx.HORIZONTAL)
         height = 250
-        width = 100
+        width = 75
         decebil_range = 50
         pan = wx.Slider(
                 self,
                 value=50,
                 minValue=0,
                 maxValue=100,
-#               pos=(20, 20),
                 size=(width, -1), 
                 style=(wx.SL_HORIZONTAL))
-        gain = wx.Slider(
+        self.gain = wx.Slider(
                 self,
                 value=200,
-                minValue=150,
+                minValue=0,
                 maxValue=500,
-#               pos=(20, 20),
                 size=(-1, height), 
                 style=(wx.SL_VERTICAL|wx.SL_INVERSE))
-        gain.Bind(wx.EVT_SCROLL, self.OnSliderScroll)
 
         # TODO make the combo_box use current_input to select the
         # right input automaticaly
-        combo_box = wx.ComboBox(
-                self, 
-                choices=inputs,
+        self.inputs = inputs
+        if not current_input:
+            current_input = "Undef"
+
+        self.select_input = wx.Button(
+                self,
+                label=current_input,
                 size=(width,-1))
-        if current_input:
-            combo_box.SetStringSelection(current_input)
         
-        gauge = wx.Gauge(
+        self.gauge = wx.Gauge(
                 self, 
                 range=decebil_range, 
                 size=(25, height),
                 style=wx.GA_VERTICAL)
 
-        combo_box.Bind(wx.EVT_COMBOBOX, self.OnSelect)
+        self.select_input.Bind(wx.EVT_BUTTON, self.OnSelect)
+        self.gain.Bind(wx.EVT_SCROLL, self.OnAdjustGain)
+        pan.Bind(wx.EVT_SCROLL, self.OnAdjustPan)
+        self.pan = pan
 
-        volumeAndMeterBarContainer.Add(gain)
-        volumeAndMeterBarContainer.Add(gauge)
+        volumeAndMeterBarContainer.Add(self.gain)
+        volumeAndMeterBarContainer.Add(self.gauge)
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(combo_box)
+        sizer.Add(self.select_input)
         sizer.Add(volumeAndMeterBarContainer)
         sizer.Add(pan)
         self.SetSizer(sizer)
 
-    def OnSliderScroll(self, e):
-        pass
+    def OnAdjustGain(self, e):
+        currentGain = self.gain.GetValue()
+        print "Changing Gain", currentGain
+
+    def OnAdjustPan(self, e):
+        currentPan = self.pan.GetValue()
+        print "Changing Pan", currentPan
 
     def OnSelect(self, e):
-        pass
+        menu = wx.Menu()
+        for item in self.inputs:
+            idnumber = wx.NewId()
+            menu.Append(idnumber, item, "some help text")
+            menu.Bind(wx.EVT_MENU, self.OnMenuSelect)
+        self.PopupMenu(menu, (0,0))
+        menu.Destroy()
+
+    def OnMenuSelect(self, event):
+        itemId = event.GetId()
+        menu = event.GetEventObject()
+        menuItem = menu.FindItemById(itemId)
 
 
 class MixPanel(scrolled.ScrolledPanel):
