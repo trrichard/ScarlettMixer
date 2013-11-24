@@ -67,3 +67,4 @@ Initial Functionality Reqs
 TODO:
     Currently the output mixers are fused to the outputs
     Mixes are hardcoded as stereo
+    Some way of managing all the poll descriptors in nonblocking/callback way
