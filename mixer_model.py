@@ -1,4 +1,5 @@
-
+import subprocess as sp
+import select
 class MixerModel:
     """
     Adapts from mixer hardware to gui.
@@ -94,6 +95,63 @@ class InputChannel():
         pass
 
 
+class ScarlettInputChannel():
+    """
+    Contains the input for the matrix and it's outputs...?
+    """
+    def __init__(self, alsa_mixers, alsa_input):
+        self.alsa_mixers = alsa_mixers
+        self.alsa_input = alsa_input
+        self.poll_descriptors = []
+        for id, mixer in self.alsa_mixers.items():
+            self.poll_descriptors.append(mixer.polldescriptors())
+        self.poll_descriptors.append(alsa_input.polldescriptors())
+        self.observers = []
+        self.poll = select.poll()
+        for pd in self.poll_descriptors:
+            self.poll.register(pd[0][0],pd[0][1])
+        print self.poll.poll(0)
+
+
+    def getCurrentInput(self):
+        """
+        Returns analog_1 etc.
+        """
+        return self.alsa_input.getenum()[0]
+
+    def setInput(self, input_name):
+        """
+        Set to analog_xyz 
+        """
+        card_index = self.alsa_input.cardname().split(":")[1]
+        command = [
+            "amixer", 
+            "-c", 
+            card_index,
+            "sset",
+            self.alsa_input.mixer(),
+            input_name]
+        print " ".join(command)
+        sp.call(command)
+    
+    def addObserver(self, toCall):
+        self.observers.append(toCall)
+        pass
+
+    def getGainRange(self,mix_number):
+        return (0,100)
+#        return self.alsa_mixers[mix_number].getrange()
+
+    def getGain(self, mix_number):
+        return int(self.alsa_mixers[mix_number].getvolume()[0])
+        
+
+    def setGain(self, mix_number,gain):
+        return self.alsa_mixers[mix_number].setvolume(gain)
+
+    def getInputChoices(self):
+        return self.alsa_input.getenum()[1]
+
 class DevInputChannel():
     """
     Contains the input for the matrix.
@@ -126,12 +184,12 @@ class DevInputChannel():
         return (0,134)
 
     def getGain(self, mix_number):
-        if mix_number > len(gains) or mix_number < 0:
+        if mix_number > len(self.gains) or mix_number < 0:
             raise "Mix number is invalid"
         return self.gains[mix_number]
 
     def setGain(self, mix_number, gain):
-        if mix_number > len(gains) or mix_number < 0:
+        if mix_number > len(self.gains) or mix_number < 0:
             raise "Mix number is invalid"
         minGain, maxGain = self.getGainRange()
         if gain < minGain or gain > maxGain:

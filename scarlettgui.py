@@ -9,8 +9,14 @@ class ChannelInputStrip(wx.Panel):
             self,
             parent,
             channels,
+            output_mixes,
             ):
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
+        self.channels = channels
+        self.output_mixes = output_mixes
+        for channel in self.channels:
+            channel.addObserver(self.reloadFromChannel)
+
         if len(channels) > 2:
             raise "Input Strips with > 2 channels not supported yet"
         # TODO: Implement Stereo Mixers/Stereo Binding
@@ -27,15 +33,14 @@ class ChannelInputStrip(wx.Panel):
                 style=(wx.SL_HORIZONTAL))
         self.gain = wx.Slider(
                 self,
-                value=200,
-                minValue=0,
-                maxValue=500,
+                value=self.channels[0].getGain(output_mixes[0]),
+                minValue=self.channels[0].getGainRange(output_mixes[0])[0],
+                maxValue=self.channels[0].getGainRange(output_mixes[0])[1],
                 size=(-1, height), 
                 style=(wx.SL_VERTICAL|wx.SL_INVERSE))
 
         # TODO make the combo_box use current_input to select the
         # right input automaticaly
-        self.channels = channels
 
         self.select_input = wx.Button(
                 self,
@@ -61,9 +66,15 @@ class ChannelInputStrip(wx.Panel):
         sizer.Add(pan)
         self.SetSizer(sizer)
 
+
+    def reloadFromChannel(self):
+        self.select_input.SetLabel(self.channels[0].getCurrentInput())
+
     def onAdjustGain(self, e):
         currentGain = self.gain.GetValue()
         print "Changing Gain", currentGain
+        for mix in self.output_mixes:
+            self.channels[0].setGain(mix,currentGain)
 
     def onAdjustPan(self, e):
         currentPan = self.pan.GetValue()
@@ -86,9 +97,10 @@ class ChannelInputStrip(wx.Panel):
 
 
 class MixPanel(scrolled.ScrolledPanel):
-    def __init__(self, parent, mixer):
+    def __init__(self, parent, mixer, output_mixes):
         scrolled.ScrolledPanel.__init__(self, parent=parent, id=wx.ID_ANY)
         self.mixer = mixer
+        self.output_mixes = output_mixes
         self.InitUI()
         self.SetAutoLayout(1)
         self.SetupScrolling()
@@ -96,13 +108,12 @@ class MixPanel(scrolled.ScrolledPanel):
     def OnSelect(self, e):
         pass
 
-    def addMatrixInput(self, panel, channels):
-        channelInputStrip = ChannelInputStrip(panel, channels)
+    def addMatrixInput(self, panel, channels, output_mixes):
+        channelInputStrip = ChannelInputStrip(panel, channels, output_mixes)
         return channelInputStrip
 
     
     def InitUI(self):
-        matrix_inputs = len(self.mixer.getMatrix())
 
         # Update using observer pattern or timers??
         # Probably observer 
@@ -118,13 +129,12 @@ class MixPanel(scrolled.ScrolledPanel):
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
 
         self.volumes = wx.BoxSizer(wx.HORIZONTAL)
-        input_channels = self.mixer.getHardwareInputMuxChannels()
-        input_channels.extend(self.mixer.getSoftwareInputMuxChannels())
-
+        
         for channel in self.mixer.getInputChannels():
             inputer = self.addMatrixInput(
                     self, 
-                    [channel])
+                    [channel],
+                    self.output_mixes)
             self.volumes.Add(inputer)
 
         vbox.Add((0, 20))
@@ -132,10 +142,7 @@ class MixPanel(scrolled.ScrolledPanel):
 
         self.SetSizer(vbox)
         
-#        self.SetSize((1000, 1000))
-#        self.SetTitle('Scarlett Mixer')
         self.Centre()
-#        self.Show(True)     
 
 
     def OnOk(self, e):
@@ -166,15 +173,15 @@ class MixPanel(scrolled.ScrolledPanel):
 class MixerConsoleMixes(wx.Notebook):
     def __init__(self,parent,mixer):
         wx.Notebook.__init__(self, parent, id=wx.ID_ANY, style=wx.BK_TOP)
-        tabOne = MixPanel(self, mixer)
+        tabOne = MixPanel(self, mixer, ["A", "B"])
 #        tabOne.SetBackgroundColour("Gray")
 #        scrollWin.SetScrollbars( 0, x,  0, y+1 )
 #       scrollWin.SetScrollRate( 1, 1 )      # Pixels per scroll increment
 #        scrollWin.SetBestSize((100,100))
 
         self.AddPage(tabOne, "A+B Mix")
-        self.AddPage(MixPanel(self,mixer), "C+D Mix")
-        self.AddPage(MixPanel(self,mixer), "E+F Mix")
+        self.AddPage(MixPanel(self,mixer, ["C", "D"]), "C+D Mix")
+        self.AddPage(MixPanel(self,mixer, ["E", "F"]), "E+F Mix")
 
         self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
         self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGING, self.OnPageChanging)

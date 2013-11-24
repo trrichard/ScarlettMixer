@@ -53,6 +53,7 @@ def unpackMixers(mixerList, scarlett_index):
 
     mixers = {}
     matricies = {}
+    matrix_inputs = {}
     for mixer_name in mixerList:
         for expression, catagory in expressions.items():
             m = expression.match(mixer_name)
@@ -63,6 +64,8 @@ def unpackMixers(mixerList, scarlett_index):
                         control=mixer_name,
                         cardindex=scarlett_index)
                 mixers[catagory].append(mixer)
+                if catagory == "matrix_source":
+                    matrix_inputs[m.group('id')] = mixer
                 if catagory == "matrix_mixer":
                     matrix_id = m.group('id')
                     matrix_mix = m.group('mix')
@@ -70,19 +73,12 @@ def unpackMixers(mixerList, scarlett_index):
                         matricies[matrix_id] = {}
                     matricies[matrix_id][matrix_mix] = mixer
 
-    print matricies
+    print mixers["matrix_source"]
+    return matricies, matrix_inputs
 
 
 class ScarlettMixerAdaptor(mixer_model.MixerModel):
-    pass
-
-
-def main(arguments):
-    mixer = None
-    if arguments["-d"]:
-        print "devmode"
-        mixer = mixer_model.DevMixerAdaptor()
-    else:
+    def __init__(self):
         cards = aa.cards()
         scarlett_index = None
         for i in range(0, len(cards)):
@@ -97,7 +93,29 @@ def main(arguments):
         scarlett_mixers = aa.mixers(scarlett_index)
         
         print "Found {} scarlett mixers".format(len(scarlett_mixers))
-        mixer = unpackMixers(scarlett_mixers,scarlett_index)
+        matricies, matrix_inputs = unpackMixers(
+                scarlett_mixers,
+                scarlett_index)
+        self.input_channels = []
+        for matrix in matricies:
+            self.input_channels.append(
+                mixer_model.ScarlettInputChannel(
+                    matricies[matrix],
+                    matrix_inputs[matrix]
+                    ))
+
+    def getInputChannels(self):
+        return self.input_channels
+
+
+
+def main(arguments):
+    mixer = None
+    if arguments["-d"]:
+        print "devmode"
+        mixer = mixer_model.DevMixerAdaptor()
+    else:
+        mixer = ScarlettMixerAdaptor()
         
 
     # Create a new app, don't redirect stdout/stderr to a window.
