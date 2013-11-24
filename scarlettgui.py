@@ -8,12 +8,10 @@ class ChannelInputStrip(wx.Panel):
     def __init__(
             self,
             parent,
-            inputs,
-            current_input,
-            channel_count=1,
+            channels,
             ):
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
-        if channel_count > 2:
+        if len(channels) > 2:
             raise "Input Strips with > 2 channels not supported yet"
         # TODO: Implement Stereo Mixers/Stereo Binding
         volumeAndMeterBarContainer = wx.BoxSizer(wx.HORIZONTAL)
@@ -37,13 +35,11 @@ class ChannelInputStrip(wx.Panel):
 
         # TODO make the combo_box use current_input to select the
         # right input automaticaly
-        self.inputs = inputs
-        if not current_input:
-            current_input = "Undef"
+        self.channels = channels
 
         self.select_input = wx.Button(
                 self,
-                label=current_input,
+                label=channels[0].getCurrentInput(),
                 size=(width,-1))
         
         self.gauge = wx.Gauge(
@@ -52,9 +48,9 @@ class ChannelInputStrip(wx.Panel):
                 size=(25, height),
                 style=wx.GA_VERTICAL)
 
-        self.select_input.Bind(wx.EVT_BUTTON, self.OnSelect)
-        self.gain.Bind(wx.EVT_SCROLL, self.OnAdjustGain)
-        pan.Bind(wx.EVT_SCROLL, self.OnAdjustPan)
+        self.select_input.Bind(wx.EVT_BUTTON, self.onSelect)
+        self.gain.Bind(wx.EVT_SCROLL, self.onAdjustGain)
+        pan.Bind(wx.EVT_SCROLL, self.onAdjustPan)
         self.pan = pan
 
         volumeAndMeterBarContainer.Add(self.gain)
@@ -65,27 +61,28 @@ class ChannelInputStrip(wx.Panel):
         sizer.Add(pan)
         self.SetSizer(sizer)
 
-    def OnAdjustGain(self, e):
+    def onAdjustGain(self, e):
         currentGain = self.gain.GetValue()
         print "Changing Gain", currentGain
 
-    def OnAdjustPan(self, e):
+    def onAdjustPan(self, e):
         currentPan = self.pan.GetValue()
         print "Changing Pan", currentPan
 
-    def OnSelect(self, e):
+    def onSelect(self, e):
         menu = wx.Menu()
-        for item in self.inputs:
+        for item in self.channels[0].getInputChoices():
             idnumber = wx.NewId()
             menu.Append(idnumber, item, "some help text")
-            menu.Bind(wx.EVT_MENU, self.OnMenuSelect)
+            menu.Bind(wx.EVT_MENU, self.onMenuSelect)
         self.PopupMenu(menu, (0,0))
         menu.Destroy()
 
-    def OnMenuSelect(self, event):
+    def onMenuSelect(self, event):
         itemId = event.GetId()
         menu = event.GetEventObject()
         menuItem = menu.FindItemById(itemId)
+        self.channels[0].setInput(menuItem.GetItemLabel())
 
 
 class MixPanel(scrolled.ScrolledPanel):
@@ -99,8 +96,8 @@ class MixPanel(scrolled.ScrolledPanel):
     def OnSelect(self, e):
         pass
 
-    def addMatrixInput(self, panel, inputs, current_input):
-        channelInputStrip = ChannelInputStrip(panel, inputs, current_input)
+    def addMatrixInput(self, panel, channels):
+        channelInputStrip = ChannelInputStrip(panel, channels)
         return channelInputStrip
 
     
@@ -124,14 +121,10 @@ class MixPanel(scrolled.ScrolledPanel):
         input_channels = self.mixer.getHardwareInputMuxChannels()
         input_channels.extend(self.mixer.getSoftwareInputMuxChannels())
 
-        for i in range(0,matrix_inputs):
-            current_value = None
-            if i in self.mixer.getMatrixMuxMap():
-                current_value = self.mixer.getMatrixMuxMap()[i]
+        for channel in self.mixer.getInputChannels():
             inputer = self.addMatrixInput(
                     self, 
-                    input_channels,
-                    current_value)
+                    [channel])
             self.volumes.Add(inputer)
 
         vbox.Add((0, 20))

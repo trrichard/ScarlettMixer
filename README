@@ -63,3 +63,7 @@ Initial Functionality Reqs
     Selection of inputs.
     Stereo joining of inputs
 
+
+TODO:
+    Currently the output mixers are fused to the outputs
+    Mixes are hardcoded as stereo
