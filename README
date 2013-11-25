@@ -75,6 +75,7 @@ TODO:
     Break out panning/reorganize to a different place
     Refactor ScarlettMixerAdaptor
     Fix the dev -d option
+    Reload Pan/Gain matrix at startup
 
 DONE
     Bug in order of the muxes 

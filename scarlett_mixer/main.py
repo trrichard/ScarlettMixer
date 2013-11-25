@@ -16,7 +16,6 @@ import os
 import select
 import wx
 import mixer_model
-import poll_alsa
 from docopt import docopt
 from scarlettgui import MixerConsoleFrame
 
@@ -145,7 +144,8 @@ class ScarlettMixerAdaptor(mixer_model.MixerModel):
             return True
         return False
 
-def main(arguments):
+def main():
+    arguments = docopt(__doc__, version='Scarlett Mixer 0.1')
     mixer = None
     poller = None
     app = wx.App(False)
@@ -173,5 +173,4 @@ def main(arguments):
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='Scarlett Mixer 0.1')
-    main(arguments)
+    main()
