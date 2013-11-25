@@ -1,6 +1,7 @@
 import wx
 # Import the easiest to use scrolledpanel.
 import wx.lib.scrolledpanel as scrolled
+import math
 from wx.lib.pubsub import Publisher
 
 TASK_RANGE = 50
@@ -27,8 +28,8 @@ class ChannelInputStrip(wx.Panel):
         decebil_range = 50
         pan = wx.Slider(
                 self,
-                value=50,
-                minValue=0,
+                value=0,
+                minValue=-100,
                 maxValue=100,
                 size=(width, -1), 
                 style=(wx.SL_HORIZONTAL))
@@ -66,18 +67,35 @@ class ChannelInputStrip(wx.Panel):
         sizer.Add(volumeAndMeterBarContainer)
         sizer.Add(pan)
         self.SetSizer(sizer)
+        self.applyGainPan()
 
     def reloadFromChannel(self):
         for channel in self.channels:
             self.select_input.SetLabel(channel.getCurrentInput())
 
     def onAdjustGain(self, e):
-        currentGain = self.gain.GetValue()
-        for mix in self.output_mixes:
-            self.channels[0].setGain(mix,currentGain)
+        self.applyGainPan()
 
     def onAdjustPan(self, e):
-        currentPan = self.pan.GetValue()
+        self.applyGainPan()
+
+    def applyGainPan(self):
+        """
+        I'm 90% sure I did this math wrong. How to calculate individual
+        gains using pan? Also, this logic should be moved elsewhere.
+        And, this is probably super inefficent.
+        """
+        currentGain = self.gain.GetValue()
+        currentPan = self.pan.GetValue()/100.0
+        pan_radians = (math.pi * (currentPan+1))/4
+        pre_gain_l = math.sin(pan_radians)**.25
+        pre_gain_r = math.cos(pan_radians)**.25
+        gain_l = currentGain * pre_gain_l
+        gain_r = currentGain * pre_gain_r 
+        print gain_l,gain_r 
+        self.channels[0].setGain(self.output_mixes[0],int(gain_l))
+        self.channels[0].setGain(self.output_mixes[1],int(gain_r))
+
 
     def onSelect(self, e):
         menu = wx.Menu()

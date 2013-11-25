@@ -72,7 +72,9 @@ TODO:
     Stereo Binding
     Toggle switches for special features (turning on and off line level etc)
     Missing Master controls
-    LR Pan is still disconnected
+    Break out panning/reorganize to a different place
+    Refactor ScarlettMixerAdaptor
+    Fix the dev -d option
 
 DONE
     Bug in order of the muxes 
@@ -81,3 +83,4 @@ DONE
         method for the whole GUI. This may be impractical but seems to be
         okay for now.
     Sliders seem to work
+    LR Pan works now
