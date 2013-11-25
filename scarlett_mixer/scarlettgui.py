@@ -92,7 +92,7 @@ class ChannelInputStrip(wx.Panel):
         pre_gain_r = math.cos(pan_radians)**.25
         gain_l = currentGain * pre_gain_l
         gain_r = currentGain * pre_gain_r 
-        print gain_l,gain_r 
+        #print gain_l,gain_r 
         self.channels[0].setGain(self.output_mixes[0],int(gain_l))
         self.channels[0].setGain(self.output_mixes[1],int(gain_r))
 
