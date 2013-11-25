@@ -68,3 +68,16 @@ TODO:
     Currently the output mixers are fused to the outputs
     Mixes are hardcoded as stereo
     Some way of managing all the poll descriptors in nonblocking/callback way
+    Clean out code base
+    Stereo Binding
+    Toggle switches for special features (turning on and off line level etc)
+    Missing Master controls
+    LR Pan is still disconnected
+
+DONE
+    Bug in order of the muxes 
+    Observer pattern isn't going to work for this. WX requires event queues.
+        This has a temp fix, using file descriptors and a single poll()
+        method for the whole GUI. This may be impractical but seems to be
+        okay for now.
+    Sliders seem to work

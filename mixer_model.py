@@ -95,6 +95,8 @@ class InputChannel():
         pass
 
 
+
+
 class ScarlettInputChannel():
     """
     Contains the input for the matrix and it's outputs...?
@@ -102,16 +104,25 @@ class ScarlettInputChannel():
     def __init__(self, alsa_mixers, alsa_input):
         self.alsa_mixers = alsa_mixers
         self.alsa_input = alsa_input
+        self.observers = []
+        self.poll_descriptors = []
+        self.registerPolls()
+
+    def registerPolls(self):
+        """
+        Can be optimized to remove and register only the polls we need
+        """
+        for pd in self.poll_descriptors:
+            self.poller.unregister(pd[0][0])
+
         self.poll_descriptors = []
         for id, mixer in self.alsa_mixers.items():
-            self.poll_descriptors.append(mixer.polldescriptors())
-        self.poll_descriptors.append(alsa_input.polldescriptors())
-        self.observers = []
-        self.poll = select.poll()
-        for pd in self.poll_descriptors:
-            self.poll.register(pd[0][0],pd[0][1])
-        print self.poll.poll(0)
+            self.poll_descriptors.append(mixer.polldescriptors()[0])
+        self.poll_descriptors.append(self.alsa_input.polldescriptors()[0])
 
+
+    def getPollDescriptiors(self):
+        return self.poll_descriptors
 
     def getCurrentInput(self):
         """
@@ -136,15 +147,15 @@ class ScarlettInputChannel():
     
     def addObserver(self, toCall):
         self.observers.append(toCall)
-        pass
 
     def getGainRange(self,mix_number):
+        # alsaaudio hardwires the volume to percentages from
+        # 0 to 100
         return (0,100)
 #        return self.alsa_mixers[mix_number].getrange()
 
     def getGain(self, mix_number):
         return int(self.alsa_mixers[mix_number].getvolume()[0])
-        
 
     def setGain(self, mix_number,gain):
         return self.alsa_mixers[mix_number].setvolume(gain)

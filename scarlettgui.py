@@ -1,21 +1,22 @@
 import wx
 # Import the easiest to use scrolledpanel.
 import wx.lib.scrolledpanel as scrolled
+from wx.lib.pubsub import Publisher
 
 TASK_RANGE = 50
+MIXER_CHANGED = "alsachanged"
+
 
 class ChannelInputStrip(wx.Panel):
     def __init__(
             self,
             parent,
             channels,
-            output_mixes,
-            ):
+            output_mixes):
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
+        
         self.channels = channels
         self.output_mixes = output_mixes
-        for channel in self.channels:
-            channel.addObserver(self.reloadFromChannel)
 
         if len(channels) > 2:
             raise "Input Strips with > 2 channels not supported yet"
@@ -66,19 +67,17 @@ class ChannelInputStrip(wx.Panel):
         sizer.Add(pan)
         self.SetSizer(sizer)
 
-
     def reloadFromChannel(self):
-        self.select_input.SetLabel(self.channels[0].getCurrentInput())
+        for channel in self.channels:
+            self.select_input.SetLabel(channel.getCurrentInput())
 
     def onAdjustGain(self, e):
         currentGain = self.gain.GetValue()
-        print "Changing Gain", currentGain
         for mix in self.output_mixes:
             self.channels[0].setGain(mix,currentGain)
 
     def onAdjustPan(self, e):
         currentPan = self.pan.GetValue()
-        print "Changing Pan", currentPan
 
     def onSelect(self, e):
         menu = wx.Menu()
@@ -109,7 +108,9 @@ class MixPanel(scrolled.ScrolledPanel):
         pass
 
     def addMatrixInput(self, panel, channels, output_mixes):
-        channelInputStrip = ChannelInputStrip(panel, channels, output_mixes)
+        channelInputStrip = ChannelInputStrip(panel, 
+                channels, 
+                output_mixes)
         return channelInputStrip
 
     
@@ -130,20 +131,34 @@ class MixPanel(scrolled.ScrolledPanel):
 
         self.volumes = wx.BoxSizer(wx.HORIZONTAL)
         
+        self.timer = wx.Timer(self, wx.NewId())
+        self.channel_input_strips = []
         for channel in self.mixer.getInputChannels():
             inputer = self.addMatrixInput(
                     self, 
                     [channel],
                     self.output_mixes)
+            self.channel_input_strips.append(inputer)
             self.volumes.Add(inputer)
+        
+        self.Bind(
+            wx.EVT_TIMER,
+            self.reloadAllChannels,
+            self.timer)
+
+        # Poll for controll changes every 200ms
+        self.timer.Start(200)
 
         vbox.Add((0, 20))
         vbox.Add(self.volumes, proportion=1)
 
         self.SetSizer(vbox)
-        
         self.Centre()
 
+    def reloadAllChannels(self, e):
+        if self.mixer.poll():
+            for vol in self.channel_input_strips:
+                vol.reloadFromChannel()
 
     def OnOk(self, e):
         

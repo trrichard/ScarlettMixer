@@ -12,8 +12,11 @@ Options:
 """
 import alsaaudio as aa
 import re
+import os
+import select
 import wx
 import mixer_model
+import poll_alsa
 from docopt import docopt
 from scarlettgui import MixerConsoleFrame
 
@@ -73,8 +76,20 @@ def unpackMixers(mixerList, scarlett_index):
                         matricies[matrix_id] = {}
                     matricies[matrix_id][matrix_mix] = mixer
 
-    print mixers["matrix_source"]
-    return matricies, matrix_inputs
+    matricies2 = []
+    # convert return values to a list so we have an order gaurentee
+    # it sucks but it needs to be done
+    for m in matricies:
+        matricies2.append(None)
+    for id,value in matricies.items():
+        matricies2[int(id)-1] = value
+    matrix_inputs2 = []
+    for m in matrix_inputs:
+        matrix_inputs2.append(None)
+    for id, value in matrix_inputs.items():
+        matrix_inputs2[int(id)-1] = value
+
+    return matricies2, matrix_inputs2
 
 
 class ScarlettMixerAdaptor(mixer_model.MixerModel):
@@ -97,33 +112,65 @@ class ScarlettMixerAdaptor(mixer_model.MixerModel):
                 scarlett_mixers,
                 scarlett_index)
         self.input_channels = []
-        for matrix in matricies:
+        for i in range(0,len(matricies)):
             self.input_channels.append(
                 mixer_model.ScarlettInputChannel(
-                    matricies[matrix],
-                    matrix_inputs[matrix]
+                    matricies[i],
+                    matrix_inputs[i]
                     ))
+        self.loadPolls()
 
     def getInputChannels(self):
         return self.input_channels
 
+    def loadPolls(self):
+        self.descriptors = set()
+        for channel in self.getInputChannels():
+            self.descriptors = self.descriptors.union(
+                    self.descriptors,
+                    set(channel.getPollDescriptiors()))
+        self.poller = select.poll()
+        for item in self.descriptors:
+            self.poller.register(item[0],item[1])
 
+    def poll(self):
+        triggered = self.poller.poll(1)
+        if triggered:
+            for a,b in triggered:
+                # read all from the descriptor,
+                # we are doing full reloads right now
+                # eventualy this read in data could be used to update
+                # the gui more directly
+                os.read(a,256)
+            return True
+        return False
 
 def main(arguments):
     mixer = None
+    poller = None
+    app = wx.App(False)
     if arguments["-d"]:
         print "devmode"
         mixer = mixer_model.DevMixerAdaptor()
     else:
+   #     poller = poll_alsa.PollAlsa()
         mixer = ScarlettMixerAdaptor()
         
 
     # Create a new app, don't redirect stdout/stderr to a window.
-    app = wx.App(False)  
-    frame = MixerConsoleFrame( None, mixer) 
+    frame = MixerConsoleFrame( None, mixer)
+    # Stop polling on window close
+    
+    if poller:
+        print "Binding Stop"
+        def HardStop(event):
+            poller.stop()
+            frame.Destroy()
+        frame.Bind(wx.EVT_CLOSE,HardStop)
     # A Frame is a top-level window.
     frame.Show(True)     # Show the frame.
     app.MainLoop()
+
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Scarlett Mixer 0.1')
