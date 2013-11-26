@@ -234,7 +234,11 @@ class MixerConsoleMixes(wx.Notebook):
 
 class MixerConsoleFrame(wx.Frame):
     def __init__(self, parent, mixer):
-        wx.Frame.__init__(self, parent, title="Scarlett Mixer", size=(200,100))
+        wx.Frame.__init__(self, 
+                parent, 
+                title="Scarlett Mixer",
+                size = ( 1000, 400),
+                )
         panel = wx.Panel(self)
         self.mixer = mixer
         mixesConsole = MixerConsoleMixes(panel,mixer)

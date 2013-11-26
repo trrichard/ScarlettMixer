@@ -170,10 +170,10 @@ class DevInputChannel():
     def __init__(self, mixer_number, input_name, outputs):
         self.mixer_number = mixer_number
         self.input_name = input_name
-        self.gains = []
+        self.gains = {}
         self.outputs = outputs
         for output in outputs:
-            self.gains.append(50)
+            self.gains[output] = 50
 
     def getCurrentInput(self):
         """
@@ -191,18 +191,18 @@ class DevInputChannel():
     def addObserver(self):
         print "Adding Observer", input_name
 
-    def getGainRange(self):
+    def getGainRange(self, mix_index):
         return (0,134)
 
     def getGain(self, mix_number):
-        if mix_number > len(self.gains) or mix_number < 0:
+        if mix_number not in self.gains:
             raise "Mix number is invalid"
         return self.gains[mix_number]
 
     def setGain(self, mix_number, gain):
-        if mix_number > len(self.gains) or mix_number < 0:
+        if mix_number not in self.gains:
             raise "Mix number is invalid"
-        minGain, maxGain = self.getGainRange()
+        minGain, maxGain = self.getGainRange(mix_number)
         if gain < minGain or gain > maxGain:
             raise "Gain is invalid"
         self.gains[mix_number] = gain
@@ -214,6 +214,7 @@ class DevInputChannel():
         for i in range(0,6):
             inputMuxChannels.append("pcm_{}".format(i))
         return inputMuxChannels
+
 
 class DevMixerAdaptor(MixerModel):
     def getHardwareOutputMuxChannels(self):
@@ -304,3 +305,5 @@ class DevMixerAdaptor(MixerModel):
             channels.append(channel)
         return channels
 
+    def poll(self):
+        return False

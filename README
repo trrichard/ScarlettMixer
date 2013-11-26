@@ -1,3 +1,6 @@
+Info:
+    A mixer interface for the Focusrite Scarlett series.
+
 Dependencies:
     docopt
     alsaaudio
@@ -76,6 +79,8 @@ TODO:
     Refactor ScarlettMixerAdaptor
     Fix the dev -d option
     Reload Pan/Gain matrix at startup
+    Test on other scarletts
+    release message
 
 DONE
     Bug in order of the muxes 
