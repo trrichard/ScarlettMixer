@@ -80,7 +80,9 @@ TODO:
     Fix the dev -d option
     Reload Pan/Gain matrix at startup
     Test on other scarletts
-    release message
+    Set pan to 50% with a button
+    Race Condition in dev mixer
+
 
 DONE
     Bug in order of the muxes 
@@ -90,3 +92,15 @@ DONE
         okay for now.
     Sliders seem to work
     LR Pan works now
+
+
+
+UML
+How should I model the fading/panning strategy?
+Mix Groups? 
+A+B C+D E+F
+
+Input === Input Channel === Fader === Mix Groups === Output Mix
+                             ||
+                             ||
+                        Fading Strategy

@@ -137,10 +137,7 @@ class MixPanel(scrolled.ScrolledPanel):
         # Update using observer pattern or timers??
         # Probably observer 
         # TODO: Strip out timer stuff
-        self.timer = wx.Timer(self, 1)
         self.count = 0
-
-        self.Bind(wx.EVT_TIMER, self.OnTimer, self.timer)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
@@ -149,7 +146,6 @@ class MixPanel(scrolled.ScrolledPanel):
 
         self.volumes = wx.BoxSizer(wx.HORIZONTAL)
         
-        self.timer = wx.Timer(self, wx.NewId())
         self.channel_input_strips = []
         for channel in self.mixer.getInputChannels():
             inputer = self.addMatrixInput(
@@ -159,13 +155,8 @@ class MixPanel(scrolled.ScrolledPanel):
             self.channel_input_strips.append(inputer)
             self.volumes.Add(inputer)
         
-        self.Bind(
-            wx.EVT_TIMER,
-            self.reloadAllChannels,
-            self.timer)
 
         # Poll for controll changes every 200ms
-        self.timer.Start(200)
 
         vbox.Add((0, 20))
         vbox.Add(self.volumes, proportion=1)
@@ -174,50 +165,31 @@ class MixPanel(scrolled.ScrolledPanel):
         self.Centre()
 
     def reloadAllChannels(self, e):
-        if self.mixer.poll():
-            for vol in self.channel_input_strips:
-                vol.reloadFromChannel()
-
-    def OnOk(self, e):
-        
-        if self.count >= TASK_RANGE:
-            return
-
-        self.timer.Start(100)
-        self.text.SetLabel('Task in Progress')
-
-    def OnStop(self, e):
-        if self.count == 0 or self.count >= TASK_RANGE or not self.timer.IsRunning():
-            return
-
-        self.timer.Stop()
-        self.text.SetLabel('Task Interrupted')
-        
-    def OnTimer(self, e):
-        
-        self.count = self.count + 1
-        self.gauge.SetValue(self.count)
-        
-        if self.count == TASK_RANGE:
-
-            self.timer.Stop()
-            self.text.SetLabel('Task Completed')
+        for vol in self.channel_input_strips:
+            vol.reloadFromChannel()
 
 class MixerConsoleMixes(wx.Notebook):
     def __init__(self,parent,mixer):
         wx.Notebook.__init__(self, parent, id=wx.ID_ANY, style=wx.BK_TOP)
+        # TODO: Iterate through list of mixer groups
+        self.mixer = mixer
         tabOne = MixPanel(self, mixer, ["A", "B"])
-#        tabOne.SetBackgroundColour("Gray")
-#        scrollWin.SetScrollbars( 0, x,  0, y+1 )
-#       scrollWin.SetScrollRate( 1, 1 )      # Pixels per scroll increment
-#        scrollWin.SetBestSize((100,100))
+        tabTwo = MixPanel(self, mixer, ["C", "D"])
+        tabThree = MixPanel(self, mixer, ["E", "F"])
 
+        self.tabs  = [tabOne, tabTwo,tabThree]
         self.AddPage(tabOne, "A+B Mix")
-        self.AddPage(MixPanel(self,mixer, ["C", "D"]), "C+D Mix")
-        self.AddPage(MixPanel(self,mixer, ["E", "F"]), "E+F Mix")
+        self.AddPage(tabTwo, "C+D Mix")
+        self.AddPage(tabThree, "E+F Mix")
 
         self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
         self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGING, self.OnPageChanging)
+        self.timer = wx.Timer(self, wx.NewId())
+        self.Bind(
+            wx.EVT_TIMER,
+            self.reloadAllChannels,
+            self.timer)
+        self.timer.Start(200)
 
     def OnPageChanged(self, event):
         old = event.GetOldSelection()
@@ -230,6 +202,11 @@ class MixerConsoleMixes(wx.Notebook):
         new = event.GetSelection()
         sel = self.GetSelection()
         event.Skip()
+
+    def reloadAllChannels(self, e):
+        if self.mixer.poll():
+            for tab in self.tabs:
+                tab.reloadAllChannels(e)
 
 
 class MixerConsoleFrame(wx.Frame):
@@ -247,5 +224,3 @@ class MixerConsoleFrame(wx.Frame):
         panel.SetSizer(sizer)
         self.Layout()
         self.Show()
-#        self.InitUI()
-

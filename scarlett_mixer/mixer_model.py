@@ -133,6 +133,7 @@ class ScarlettInputChannel():
     def setInput(self, input_name):
         """
         Set to analog_xyz 
+        TODO: Add this amixer control to the alsaaudio library
         """
         card_index = self.alsa_input.cardname().split(":")[1]
         command = [
@@ -172,6 +173,7 @@ class DevInputChannel():
         self.input_name = input_name
         self.gains = {}
         self.outputs = outputs
+        self.changed = False
         for output in outputs:
             self.gains[output] = 50
 
@@ -185,18 +187,17 @@ class DevInputChannel():
         """
         Set to analog_xyz 
         """
-        print "Setting input to", input_name
         self.input_name = input_name
+        self.changed = True
     
-    def addObserver(self):
-        print "Adding Observer", input_name
 
     def getGainRange(self, mix_index):
         return (0,134)
 
     def getGain(self, mix_number):
         if mix_number not in self.gains:
-            raise "Mix number is invalid"
+            print "Mix number {} is invalid".format(mix_number)
+            raise "err"
         return self.gains[mix_number]
 
     def setGain(self, mix_number, gain):
@@ -205,7 +206,12 @@ class DevInputChannel():
         minGain, maxGain = self.getGainRange(mix_number)
         if gain < minGain or gain > maxGain:
             raise "Gain is invalid"
+        print "Mixer:{} Mix:{} Gain:{}".format(
+                self.mixer_number,
+                mix_number,
+                gain)
         self.gains[mix_number] = gain
+        self.changed = True
 
     def getInputChoices(self):
         inputMuxChannels = []
@@ -215,8 +221,25 @@ class DevInputChannel():
             inputMuxChannels.append("pcm_{}".format(i))
         return inputMuxChannels
 
+    def ifChangedResetState(self):
+        if self.changed:
+            self.changed = False
+            return True
+        return False
 
 class DevMixerAdaptor(MixerModel):
+    def __init__(self):
+        self.matrix_in = 18
+        self.matrix_out = 6
+        self.matrix = []
+        self.channels = []
+        self.outputs = ["A", "B", "C", "D", "E", "F" ]
+        for i in range(0,self.matrix_in):
+            channel = DevInputChannel(i, 
+                    self.getMatrixMuxMap()[i], 
+                    self.outputs)
+            self.channels.append(channel)
+
     def getHardwareOutputMuxChannels(self):
         "[ list of names? ]"
         return [ 
@@ -295,15 +318,11 @@ class DevMixerAdaptor(MixerModel):
         return matrix
 
     def getInputChannels(self):
-        matrix_in = 18
-        matrix_out = 6
-        matrix = []
-        channels = []
-        outputs = ["A", "B", "C", "D", "E", "F" ]
-        for i in range(0,matrix_in):
-            channel = DevInputChannel(i, self.getMatrixMuxMap()[i], outputs)
-            channels.append(channel)
-        return channels
+        return self.channels
 
     def poll(self):
-        return False
+        changed = False
+        for c in self.channels:
+            if c.ifChangedResetState():
+                changed = True
+        return changed
