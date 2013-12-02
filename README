@@ -77,12 +77,9 @@ TODO:
     Missing Master controls
     Break out panning/reorganize to a different place
     Refactor ScarlettMixerAdaptor
-    Fix the dev -d option
     Reload Pan/Gain matrix at startup
     Test on other scarletts
     Set pan to 50% with a button
-    Race Condition in dev mixer
-
 
 DONE
     Bug in order of the muxes 
