@@ -70,6 +70,8 @@ Initial Functionality Reqs
 TODO:
     Currently the output mixers are fused to the outputs
     Mixes are hardcoded as stereo
+    Hard code the AB CD etc outputs to monitors and headphones
+    Add Save To Hardware button? Maybe do it automaticaly?
     Some way of managing all the poll descriptors in nonblocking/callback way
     Clean out code base
     Stereo Binding
