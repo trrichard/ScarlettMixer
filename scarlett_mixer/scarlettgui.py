@@ -106,7 +106,6 @@ class ChannelInputStrip(wx.Panel):
         gain_r = currentGain * pre_gain_r 
         self.channel.setGain(self.output_mixes[0],int(gain_l))
         self.channel.setGain(self.output_mixes[1],int(gain_r))
-        print "applying"
 
 
     def onSelect(self, e):
