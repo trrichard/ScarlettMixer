@@ -2,31 +2,27 @@ import wx
 # Import the easiest to use scrolledpanel.
 import wx.lib.scrolledpanel as scrolled
 import math
-from wx.lib.pubsub import Publisher
 
 TASK_RANGE = 50
 MIXER_CHANGED = "alsachanged"
-
 
 class ChannelInputStrip(wx.Panel):
     def __init__(
             self,
             parent,
-            channels,
+            channel,
             output_mixes):
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
         
-        self.channels = channels
+        self.channel = channel
         self.output_mixes = output_mixes
 
-        if len(channels) > 2:
-            raise "Input Strips with > 2 channels not supported yet"
         # TODO: Implement Stereo Mixers/Stereo Binding
         volumeAndMeterBarContainer = wx.BoxSizer(wx.HORIZONTAL)
         height = 250
         width = 75
         decebil_range = 50
-        pan = wx.Slider(
+        self.pan = wx.Slider(
                 self,
                 value=0,
                 minValue=-100,
@@ -35,19 +31,12 @@ class ChannelInputStrip(wx.Panel):
                 style=(wx.SL_HORIZONTAL))
         self.gain = wx.Slider(
                 self,
-                value=self.channels[0].getGain(output_mixes[0]),
-                minValue=self.channels[0].getGainRange(output_mixes[0])[0],
-                maxValue=self.channels[0].getGainRange(output_mixes[0])[1],
+                value=self.channel.getGain(output_mixes[0]),
+                minValue=self.channel.getGainRange(output_mixes[0])[0],
+                maxValue=self.channel.getGainRange(output_mixes[0])[1],
                 size=(-1, height), 
                 style=(wx.SL_VERTICAL|wx.SL_INVERSE))
 
-        # TODO make the combo_box use current_input to select the
-        # right input automaticaly
-
-        self.select_input = wx.Button(
-                self,
-                label=channels[0].getCurrentInput(),
-                size=(width,-1))
         
         self.gauge = wx.Gauge(
                 self, 
@@ -55,29 +44,50 @@ class ChannelInputStrip(wx.Panel):
                 size=(25, height),
                 style=wx.GA_VERTICAL)
 
-        self.select_input.Bind(wx.EVT_BUTTON, self.onSelect)
         self.gain.Bind(wx.EVT_SCROLL, self.onAdjustGain)
-        pan.Bind(wx.EVT_SCROLL, self.onAdjustPan)
-        self.pan = pan
 
         volumeAndMeterBarContainer.Add(self.gain)
         volumeAndMeterBarContainer.Add(self.gauge)
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(self.select_input)
+
+        if channel.isInputSetable():
+            self.select_input = wx.Button(
+                    self,
+                    label=channel.getCurrentInput(),
+                    size=(width,-1))
+            self.select_input.Bind(wx.EVT_BUTTON, self.onSelect)
+            sizer.Add(self.select_input)
+        else:
+            self.select_input = wx.StaticText(
+                    self,
+                    label=channel.getCurrentInput(),
+                    size=(width,-1))
+            self.select_input.Bind(wx.EVT_BUTTON, self.onSelect)
+            sizer.Add(self.select_input)
+
         sizer.Add(volumeAndMeterBarContainer)
-        sizer.Add(pan)
+        if len(output_mixes) > 1:
+            self.pan.Bind(wx.EVT_SCROLL, self.onAdjustPan)
+            sizer.Add(self.pan)
+
         self.SetSizer(sizer)
-        self.applyGainPan()
 
     def reloadFromChannel(self):
-        for channel in self.channels:
-            self.select_input.SetLabel(channel.getCurrentInput())
+        self.select_input.SetLabel(self.channel.getCurrentInput())
 
     def onAdjustGain(self, e):
-        self.applyGainPan()
+        if self.output_mixes > 1:
+            self.applyGainPan()
+        else:
+            self.channel.setGain(self.gain.GetValue())
 
     def onAdjustPan(self, e):
         self.applyGainPan()
+
+    def getGainPan(self):
+        left_gain = self.channel.getGain(self.output_mixes[0])
+        right_gain = self.channel.getGain(self.output_mixes[1])
+        #TODO: reverse the formula in applyGainPan()
 
     def applyGainPan(self):
         """
@@ -92,25 +102,24 @@ class ChannelInputStrip(wx.Panel):
         pre_gain_r = math.cos(pan_radians)**.25
         gain_l = currentGain * pre_gain_l
         gain_r = currentGain * pre_gain_r 
-        #print gain_l,gain_r 
-        self.channels[0].setGain(self.output_mixes[0],int(gain_l))
-        self.channels[0].setGain(self.output_mixes[1],int(gain_r))
+        self.channel.setGain(self.output_mixes[0],int(gain_l))
+        self.channel.setGain(self.output_mixes[1],int(gain_r))
 
 
     def onSelect(self, e):
         menu = wx.Menu()
-        for item in self.channels[0].getInputChoices():
+        for item in self.channel.getInputChoices():
             idnumber = wx.NewId()
-            menu.Append(idnumber, item, "some help text")
+            menu.Append(idnumber, item, "Select {}".format(item))
             menu.Bind(wx.EVT_MENU, self.onMenuSelect)
-        self.PopupMenu(menu, (0,0))
+        self.PopupMenu(menu,(0,0))
         menu.Destroy()
 
     def onMenuSelect(self, event):
         itemId = event.GetId()
         menu = event.GetEventObject()
         menuItem = menu.FindItemById(itemId)
-        self.channels[0].setInput(menuItem.GetItemLabel())
+        self.channel.setInput(menuItem.GetItemLabel())
 
 
 class MixPanel(scrolled.ScrolledPanel):
@@ -125,18 +134,14 @@ class MixPanel(scrolled.ScrolledPanel):
     def OnSelect(self, e):
         pass
 
-    def addMatrixInput(self, panel, channels, output_mixes):
+    def addMatrixInput(self, panel, channel, output_mixes):
         channelInputStrip = ChannelInputStrip(panel, 
-                channels, 
+                channel, 
                 output_mixes)
         return channelInputStrip
 
     
     def InitUI(self):
-
-        # Update using observer pattern or timers??
-        # Probably observer 
-        # TODO: Strip out timer stuff
         self.count = 0
 
         vbox = wx.BoxSizer(wx.VERTICAL)
@@ -150,13 +155,23 @@ class MixPanel(scrolled.ScrolledPanel):
         for channel in self.mixer.getInputChannels():
             inputer = self.addMatrixInput(
                     self, 
-                    [channel],
+                    channel,
                     self.output_mixes)
             self.channel_input_strips.append(inputer)
-            self.volumes.Add(inputer)
         
+        for index in range(0,len(self.channel_input_strips),2):
+            left = self.channel_input_strips[index]
+            right = self.channel_input_strips[index+1]
+            strip_pair_top = wx.BoxSizer(wx.HORIZONTAL)
+            strip_pair = wx.BoxSizer(wx.VERTICAL)
+            strip_pair_top.Add(left)
+            strip_pair_top.Add(right)
+            strip_pair.Add(strip_pair_top)
+            join_stereo_pair = wx.Button(
+                    self,label="Join",)
+            strip_pair.Add(join_stereo_pair)
+            self.volumes.Add(strip_pair)
 
-        # Poll for controll changes every 200ms
 
         vbox.Add((0, 20))
         vbox.Add(self.volumes, proportion=1)
@@ -208,19 +223,44 @@ class MixerConsoleMixes(wx.Notebook):
             for tab in self.tabs:
                 tab.reloadAllChannels(e)
 
+class MixerConsoleMasters(wx.Panel):
+    def __init__(
+            self,
+            parent,
+            mixer):
+        wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
+        self.master_mix_strips = []
+        sizer = wx.BoxSizer(wx.HORIZONTAL)
+        for channel in mixer.getMasterChannels():
+            # Add that channel as a mixer strip
+            mixes = channel.getMixList()
+            print mixes
+            if len(mixes) < 1:
+                print "skip"
+                continue
+            input_strip = ChannelInputStrip(
+                    self,
+                    channel,
+                    mixes)
+            self.master_mix_strips.append(input_strip)
+            sizer.Add(input_strip)
+
+        self.SetSizer(sizer)
 
 class MixerConsoleFrame(wx.Frame):
     def __init__(self, parent, mixer):
         wx.Frame.__init__(self, 
                 parent, 
                 title="Scarlett Mixer",
-                size = ( 1000, 400),
+                size = ( 1000, 450),
                 )
         panel = wx.Panel(self)
         self.mixer = mixer
-        mixesConsole = MixerConsoleMixes(panel,mixer)
+        mixesConsole = MixerConsoleMixes(panel, mixer)
+        mastersConsole = MixerConsoleMasters(panel, mixer)
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(mixesConsole, 1, wx.ALL|wx.EXPAND, 5)
+        sizer.Add(mastersConsole, 1)
         panel.SetSizer(sizer)
         self.Layout()
         self.Show()

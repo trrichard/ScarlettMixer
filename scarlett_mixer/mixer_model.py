@@ -63,6 +63,9 @@ class MixerModel:
     def getInputChannels(self):
         pass
 
+    def getMasterChannels(self):
+        pass
+
 
 class InputChannel():
     """
@@ -84,6 +87,9 @@ class InputChannel():
         """
         pass
     
+    def getInputChoices(self):
+        pass
+    
     def addObserver(self):
         pass
 
@@ -96,8 +102,44 @@ class InputChannel():
     def setGain(self, mix_number):
         pass
 
+
+class MasterChannel():
+    """
+    Contains the controls for any of the master channels. 
+    """
+    def __init__(self):
+        pass
+
+    def getName(self):
+        """
+        Returns analog_1 etc.
+        """
+        pass
+
+    def getGainRange(self):
+        return (0,100)
+
+    def getGain(self, mix_number):
+        pass
+
+    def setGain(self, mix_number):
+        pass
+    
+    def getCurrentInput(self):
+        """
+        Returns analog_1 etc.
+        """
+        pass
+
+    def setInput(self):
+        """
+        Set to analog_xyz 
+        """
+        pass
+
     def getInputChoices(self):
         pass
+
 
 def unpackMixers(mixerList, scarlett_index):
     """Given a list of mixers, return the logical objects associated
@@ -114,7 +156,7 @@ def unpackMixers(mixerList, scarlett_index):
         Input Adjustments : turns on and off settings for certian inputs"""
 
     master_re = re.compile(
-            r'Master (?P<balance>\w*) \((?P<output>\w*)')
+            r'Master (?P<balance>\w*) \((?P<output>.*)\)')
     global_volume_re = re.compile(r'^Master$')
     matrix_re = re.compile(r'Matrix (?P<id>[0-9]+) Mix (?P<mix>\w+)')
     matrix_input_re = re.compile(r'Matrix (?P<id>[0-9]+) Input')
@@ -136,6 +178,7 @@ def unpackMixers(mixerList, scarlett_index):
     mixers = {}
     matricies = {}
     matrix_inputs = {}
+    masters = {}
     for mixer_name in mixerList:
         for expression, catagory in expressions.items():
             m = expression.match(mixer_name)
@@ -154,6 +197,17 @@ def unpackMixers(mixerList, scarlett_index):
                     if matrix_id not in matricies:
                         matricies[matrix_id] = {}
                     matricies[matrix_id][matrix_mix] = mixer
+                if catagory == "master_volume":
+                    if m.groups():
+                        balance = m.group('balance')
+                        output = m.group('output')
+                        if output not in masters:
+                            masters[output] = {}
+                        masters[output][balance] = mixer
+                    else:
+                        if None not in masters:
+                            masters[None] = {}
+                        masters[None][None] = mixer
 
     matricies2 = []
     # convert return values to a list so we have an order gaurentee
@@ -168,7 +222,8 @@ def unpackMixers(mixerList, scarlett_index):
     for id, value in matrix_inputs.items():
         matrix_inputs2[int(id)-1] = value
 
-    return matricies2, matrix_inputs2
+    print masters
+    return matricies2, matrix_inputs2, masters
 
 class ScarlettMixerAdaptor(MixerModel):
     def __init__(self):
@@ -186,7 +241,7 @@ class ScarlettMixerAdaptor(MixerModel):
         scarlett_mixers = aa.mixers(scarlett_index)
         
         print "Found {} scarlett mixers".format(len(scarlett_mixers))
-        matricies, matrix_inputs = unpackMixers(
+        matricies, matrix_inputs, masters = unpackMixers(
                 scarlett_mixers,
                 scarlett_index)
         self.input_channels = []
@@ -197,6 +252,17 @@ class ScarlettMixerAdaptor(MixerModel):
                     matrix_inputs[i]
                     ))
         self.loadPolls()
+        self.master_mixers = []
+        for output in masters:
+            input_controller = None
+            lr_mixers = {}
+            for con in masters[output]:
+                if len(masters[output][con].getenum()) == 0:
+                    input_controller =  masters[output][con]
+                else:
+                    lr_mixers[con] = masters[output][con]
+            self.master_mixers.append(
+                    ScarlettInputChannel(lr_mixers,input_controller))
 
     def getInputChannels(self):
         return self.input_channels
@@ -220,6 +286,9 @@ class ScarlettMixerAdaptor(MixerModel):
                 # eventualy this read in data could be used to update
                 # the gui more directly
                 os.read(a,256)
+    
+    def getMasterChannels(self):
+        return self.master_mixers
  
 class ScarlettInputChannel():
     """
@@ -241,9 +310,16 @@ class ScarlettInputChannel():
 
         self.poll_descriptors = []
         for id, mixer in self.alsa_mixers.items():
-            self.poll_descriptors.append(mixer.polldescriptors()[0])
-        self.poll_descriptors.append(self.alsa_input.polldescriptors()[0])
-
+            if mixer:
+                self.poll_descriptors.append(mixer.polldescriptors()[0])
+        if self.alsa_input:
+            self.poll_descriptors.append(
+                    self.alsa_input.polldescriptors()[0])
+    def getMixList(self):
+        mixlist = []
+        for mixer in self.alsa_mixers:
+            mixlist.append(mixer)
+        return mixlist
 
     def getPollDescriptiors(self):
         return self.poll_descriptors
@@ -252,7 +328,13 @@ class ScarlettInputChannel():
         """
         Returns analog_1 etc.
         """
-        return self.alsa_input.getenum()[0]
+        if self.isInputSetable():
+            return self.alsa_input.getenum()[0]
+        print self.alsa_input
+        return self.alsa_input.mixer()
+
+    def isInputSetable(self):
+        return len(self.alsa_input.getenum())>0
 
     def setInput(self, input_name):
         """
@@ -288,6 +370,78 @@ class ScarlettInputChannel():
     def getInputChoices(self):
         return self.alsa_input.getenum()[1]
 
+class ScarlettMasterChannel():
+    """
+    Contains the mixer for a master channel.
+    """
+    def __init__(self, alsa_mixer, alsa_inputs):
+        self.alsa_mixer = alsa_mixers
+        self.alsa_inputs = alsa_input
+        self.observers = []
+        self.poll_descriptors = []
+        self.registerPolls()
+
+    def registerPolls(self):
+        """
+        Can be optimized to remove and register only the polls we need
+        """
+        for pd in self.poll_descriptors:
+            self.poller.unregister(pd[0][0])
+
+        self.poll_descriptors = []
+        for id, mixer in self.alsa_mixers.items():
+            if mixer:
+                self.poll_descriptors.append(mixer.polldescriptors()[0])
+        if self.alsa_input:
+            self.poll_descriptors.append(
+                    self.alsa_input.polldescriptors()[0])
+    def getMixList(self):
+        mixlist = []
+        for mixer in self.alsa_mixers:
+            mixlist.append(mixer)
+        return mixlist
+
+    def getPollDescriptiors(self):
+        return self.poll_descriptors
+
+    def getCurrentInput(self):
+        """
+        Returns analog_1 etc.
+        """
+        if len(self.alsa_input.getenum())>0:
+            return self.alsa_input.getenum()[0]
+        return None
+
+    def setInput(self, input_name):
+        """
+        Set to analog_xyz 
+        TODO: Add this amixer control to the alsaaudio library
+        """
+        card_index = self.alsa_input.cardname().split(":")[1]
+        command = [
+            "amixer", 
+            "-c", 
+            card_index,
+            "sset",
+            self.alsa_input.mixer(),
+            input_name]
+        print " ".join(command)
+        sp.call(command)
+
+    def getGainRange(self,mix_number):
+        # alsaaudio hardwires the volume to percentages from
+        # 0 to 100 need to patch alsaaudio
+        return (0,100)
+#        return self.alsa_mixers[mix_number].getrange()
+
+    def getGain(self, mix_number):
+        return int(self.alsa_mixers[mix_number].getvolume()[0])
+
+    def setGain(self, mix_number,gain):
+        return self.alsa_mixers[mix_number].setvolume(gain)
+
+    def getInputChoices(self):
+        return self.alsa_input.getenum()[1]
 class DevInputChannel():
     """
     Contains the input for the matrix.
@@ -350,6 +504,9 @@ class DevInputChannel():
             self.changed = False
             return True
         return False
+    
+    def getMixList(self):
+        return self.outputs
 
 class DevMixerAdaptor(MixerModel):
     def __init__(self):
@@ -450,3 +607,7 @@ class DevMixerAdaptor(MixerModel):
             if c.ifChangedResetState():
                 changed = True
         return changed
+    
+    def getMasterChannels(self):
+        masters = [DevInputChannel(1,"BadAss",["L","R"])]
+        return masters
