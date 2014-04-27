@@ -71,9 +71,11 @@ class ChannelInputStrip(wx.Panel):
             sizer.Add(self.pan)
 
         self.SetSizer(sizer)
+        self.applyGainPan()
 
     def reloadFromChannel(self):
         self.select_input.SetLabel(self.channel.getCurrentInput())
+        self.applyGainPan()
 
     def onAdjustGain(self, e):
         if self.output_mixes > 1:
@@ -104,6 +106,7 @@ class ChannelInputStrip(wx.Panel):
         gain_r = currentGain * pre_gain_r 
         self.channel.setGain(self.output_mixes[0],int(gain_l))
         self.channel.setGain(self.output_mixes[1],int(gain_r))
+        print "applying"
 
 
     def onSelect(self, e):

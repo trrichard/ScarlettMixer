@@ -280,6 +280,7 @@ class ScarlettMixerAdaptor(MixerModel):
     def poll(self):
         triggered = self.poller.poll(1)
         if triggered:
+            print "triggered"
             for a,b in triggered:
                 # read all from the descriptor,
                 # we are doing full reloads right now
