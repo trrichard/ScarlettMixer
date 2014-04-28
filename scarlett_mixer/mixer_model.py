@@ -286,6 +286,7 @@ class ScarlettMixerAdaptor(MixerModel):
                 # eventualy this read in data could be used to update
                 # the gui more directly
                 os.read(a,256)
+            return True
     
     def getMasterChannels(self):
         return self.master_mixers

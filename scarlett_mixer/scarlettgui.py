@@ -75,7 +75,8 @@ class ChannelInputStrip(wx.Panel):
 
     def reloadFromChannel(self):
         self.select_input.SetLabel(self.channel.getCurrentInput())
-        self.applyGainPan()
+        #self.applyGainPan()
+        self.getGainPan()
 
     def onAdjustGain(self, e):
         if self.output_mixes > 1:
@@ -87,9 +88,15 @@ class ChannelInputStrip(wx.Panel):
         self.applyGainPan()
 
     def getGainPan(self):
+        #TODO: reverse the formula in applyGainPan()
         left_gain = self.channel.getGain(self.output_mixes[0])
         right_gain = self.channel.getGain(self.output_mixes[1])
-        #TODO: reverse the formula in applyGainPan()
+        currentGain = (left_gain**8 + right_gain**8)**.125
+        currentPan = math.asin((left_gain/(currentGain+1))**4)
+        # currentPan needs to map back from radians to regular numbers
+        #print self.channel.getCurrentInput(), currentGain, currentPan
+        #self.gain.SetValue(currentGain)
+        #self.pan.SetValue(currentPan)
 
     def applyGainPan(self):
         """
@@ -187,7 +194,9 @@ class MixPanel(scrolled.ScrolledPanel):
 
 class MixerConsoleMixes(wx.Notebook):
     def __init__(self,parent,mixer):
-        wx.Notebook.__init__(self, parent, id=wx.ID_ANY, style=wx.BK_TOP)
+        wx.Notebook.__init__(self, parent, id=wx.ID_ANY, 
+                style=wx.BK_TOP,
+                size=(-1,420))
         # TODO: Iterate through list of mixer groups
         self.mixer = mixer
         tabOne = MixPanel(self, mixer, ["A", "B"])
@@ -222,6 +231,7 @@ class MixerConsoleMixes(wx.Notebook):
 
     def reloadAllChannels(self, e):
         if self.mixer.poll():
+            print "Reloading"
             for tab in self.tabs:
                 tab.reloadAllChannels(e)
 
@@ -254,14 +264,14 @@ class MixerConsoleFrame(wx.Frame):
         wx.Frame.__init__(self, 
                 parent, 
                 title="Scarlett Mixer",
-                size = ( 1000, 450),
+                size = ( 1000, 1000),
                 )
         panel = wx.Panel(self)
         self.mixer = mixer
         mixesConsole = MixerConsoleMixes(panel, mixer)
         mastersConsole = MixerConsoleMasters(panel, mixer)
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(mixesConsole, 1, wx.ALL|wx.EXPAND, 5)
+        sizer.Add(mixesConsole, 1,wx.ALL|wx.EXPAND|wx.FIXED_MINSIZE, 0)
         sizer.Add(mastersConsole, 1)
         panel.SetSizer(sizer)
         self.Layout()
