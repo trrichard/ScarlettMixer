@@ -178,8 +178,8 @@ class MixPanel(scrolled.ScrolledPanel):
             strip_pair.Add(strip_pair_top)
             join_stereo_pair = wx.Button(
                     self,label="Join",)
-            strip_pair.Add(join_stereo_pair)
-            self.volumes.Add(strip_pair)
+            strip_pair.Add(join_stereo_pair,0,wx.ALIGN_CENTER)
+            self.volumes.Add(strip_pair,0)
 
 
         vbox.Add((0, 20))
@@ -271,7 +271,8 @@ class MixerConsoleFrame(wx.Frame):
         mixesConsole = MixerConsoleMixes(panel, mixer)
         mastersConsole = MixerConsoleMasters(panel, mixer)
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(mixesConsole, 1,wx.ALL|wx.EXPAND|wx.FIXED_MINSIZE, 0)
+        sizer.Add(mixesConsole, 0,wx.ALL|wx.EXPAND, 0)
+        #sizer.AddStretchSpacer()
         sizer.Add(mastersConsole, 1)
         panel.SetSizer(sizer)
         self.Layout()
